@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&family=Song+Myung&display=swap" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&family=Song+Myung&display=swap" rel="stylesheet">
+    <title>Ilbo회원가입</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<style>
+    * {
+        /* font-family: 'Hi Melody', cursive;
+        font-family: 'Song Myung', serif; */
+        font-family: 'Hi Melody', cursive;
+        font-family: 'Song Myung', serif;
+        /* font-size: large; */
+    }
+
+    body {
+        padding: 40px 0px;
+    }
+
+    h1 {
+        text-align: center;
+        color: darkblue;
+    }
+
+    .container {
+        width: 800px;
+    }
+</style>
+<body>
+    <div>
+        <h1>Ilbo회원가입</h1>
+    </div>
+    <div id="save_from" class="container">
+        <label for="id">아이디</label>
+        <input type="text" id="member-id" name="member_id" class="form-control" onblur="id_check()"
+            placeholder="이메일을 입력해 주세요.">
+        <h6 id="email-result"></h6> <br>
+
+        <label for="password">비밀번호</label>
+        <input type="password" id="member-password" name="member_password" class="form-control"
+            onblur="password_check()" placeholder="비밀번호를 입력해 주세요.">
+        <h6 id="password-result"></h6> <br>
+
+        <label for="password_confirm">비밀번호확인</label>
+        <input type="password" id="password-confirm" name="password_confirm" class="form-control"
+            onblur="password_confirm()" placeholder="비밀번호를 다시 입력해 주세요.">
+        <h6 id="password-confirm-result"></h6> <br>
+
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" class="form-control" onblur="name_check()" placeholder="이름을 입력해 주세요.">
+        <h6 id="name-result"></h6> <br>
+
+        <label for="birth_year">생년월일</label>
+        <div class="row">
+            <div class="col">
+                <input type="text" id="birth_year" name="birth_year" class="form-control" placeholder="년(4자)"
+                    maxlength="4" onblur="birth_year_check()">
+                <h6 id="birth-year-result"></h6> <br>
+            </div>
+            <div class="col">
+                <select name="birth_month" id="" class="form-select">
+                    <option value="">월</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" id="birth_day" name="birth_day" placeholder="일" class="form-control" maxlength="2"
+                    onblur="birth_day_check()">
+                <h6 id="birth-day-result"></h6>
+            </div>
+        </div>
+
+        <label for="gender">성별</label> <br><br>
+        남 : <input type="radio" name="gender" value="male" class="form-check-input">
+        여 : <input type="radio" name="gender" value="female" class="form-check-input">
+        </select> <br><br>
+
+        <!-- <label for="email">이메일</label>
+        <div class="row">
+            <div class="col">
+                <input type="text" id="email-value" name="emailValue" class="form-control" onblur="email_check()">
+            </div>
+            @
+            <div class="col">
+                <input type="text" id="email-domain" name="emailDomain" class="form-control">
+            </div>
+            <div class="col">
+                <select id="email-domain-select" onchange="domain_select()" class="form-select">
+                    <option value="">직접입력</option>
+                    <option value="naver.com">네이버</option>
+                    <option value="gmail.com">지메일</option>
+                    <option value="daum.net">다음</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="button" class="btn btn-primary btn-block" value="이메일 확인" onclick="hello()">
+            </div>
+            <h6 id="email-result"></h6>
+            <h6 id="email-domain-result"></h6>
+        </div> <br> -->
+
+        <h6 id="address-result"></h6>
+        <label for="email">이메일 입력</label>
+        <div class="row">
+            <div class="col">
+                <input type="text" id="member-email" name="memberEmail" oninput="email_check()"
+                    class="form-control">
+            </div>
+            @
+            <div class="col">
+                <input type="text" id="email-domain" name="emailDomain" class="form-control">
+            </div>
+            <div class="col">
+                <select id="email-domain-select" onchange="domain_select()" class="form-select">
+                    <option value="">직접입력</option>
+                    <option value="naver.com">네이버</option>
+                    <option value="gmail.com">지메일</option>
+                    <option value="daum.net">다음</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="button" id="send-verification-code" class="btn btn-primary" value="이메일 확인" onclick="sendVerificationCode()">
+            </div>
+            <h6 id="email-result"></h6> <br>
+        </div>
+            <!-- <div class="col-2">
+                <input type="button" id="send-verification-code" class="btn btn-primary mb-3" value="인증코드 전송" onclick="sendVerificationCode()">
+            </div>
+        </div>
+        <h6 id="email-result"></h6>
+        <label for="verification-code">인증코드</label>
+        <div class="row g-2">
+            <div class="col-5">
+                <input type="text" id="verification-code" class="form-control mb-3">
+                <small id="verification-code-help" class="form-text text-muted">이메일로 전송된 인증코드를 입력하세요.</small>
+            </div>
+            <div class="col-md-3">
+                <input type="button" id="verify-code" class="btn btn-primary mb-3" value="인증 확인" onclick="verifyCode()">
+            </div>
+            <h6 id="verification-code-result"></h6>
+        </div> -->
+
+        <label for="mobile">휴대전화</label>
+        <div class="row">
+            <div class="col-md-3">
+                <select name="mobile_carrier" id="" class="form-select">
+                    <option value="">통신사선택</option>
+                    <option value="LG U+">LG U+</option>
+                    <option value="SKT">SKT</option>
+                    <option value="KT">KT</option>
+                    <option value="MVNO">MVNO</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="nation_code" id="" class="form-select">
+                    <option value="233">가나 +233</option>
+                    <option value="31">네덜란드 +31</option>
+                    <option value="82" selected>대한민국 +82</option>
+                    <option value="1">미국 +1</option>
+                    <option value="84">베트남 +84</option>
+                    <option value="41">스위스 +41</option>
+                    <option value="81">일본 +81</option>
+                    <option value="33">프랑스 +33</option>
+                    <option value="582">홍콩 +582</option>
+                </select>
+            </div>
+            <div class="phone col-md-6">
+                <input id="phone" type="text" maxlength="11" oninput="phoneNumber()"
+                class="form-control rounded-2">
+            </div>
+        </div> <br>
+
+        <!-- <div class="input-group"> -->
+        <!-- <div class="phone input-group">
+            <input id="phone1" type="text" size="1" maxlength="3" oninput="changePhone1()"
+                class="form-control rounded-2"> -
+            <input id="phone2" type="text" size="3" maxlength="4" oninput="changePhone2()"
+                class="form-control rounded-2"> -
+            <input id="phone3" type="text" size="3" maxlength="4" oninput="changePhone3()"
+                class="form-control rounded-2">
+        </div> -->
+
+        <!-- </div> -->
+
+        <div class="auth">
+            <button disabled id="sendMessage" onclick="getToken()">인증번호 전송</button>
+            <div id="certificationNumber">000000</div>
+        </div>
+
+        <div class="timer">
+            <div id="timeLimit">05:00</div>
+            <button disabled id="completion" onclick="checkCompletion()">인증확인</button>
+        </div> <br>
+
+        <!-- row g-2 가로로 배치할 요소의 숫자 -->
+        <!-- <div class="row g-2"> -->
+        <!-- <div class="col-8"> -->
+        <!-- <select name="" -->
+        <!-- <input type="text" id="mobile" name="mobile" class="form-control" placeholder="전화번호 입력"> -->
+        <!-- </div> <br> -->
+        <!-- onclick 속성: onclick 속성을 적용하면 요소(태그)에 click 이벤트가 발생하면
+                                실행할 javascript 함수 또는 문법을 지정함
+                아래 버튼을 클릭하면 hello 함수 호출 -->
+        <!-- <div class="col-4 d-grid"> -->
+        <!-- <input type="button" class="btn btn-primary btn-block" value="인증번호 받기" onclick="hello()"> -->
+        <!-- </div> -->
+        <!-- </div> <br> -->
+        <!-- <input type="text" id="mobile_check" name="mobile_check" class="form-control mt-2" placeholder="인증번호 입력하세요"> <br> -->
+        <div class="row">
+            <div class="col mb3">
+                <input type="text" id="sample6_postcode" placeholder="우편번호" class="form-control">
+            </div>
+            <div class="col">
+                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"
+                    class="btn btn-primary btn-block"><br>
+            </div>
+        </div> <br>
+        <input type="text" id="sample6_address" placeholder="주소" class="form-control"><br>
+        <div class="row">
+            <div class="col">
+                <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
+            </div>
+        </div> <br>
+        <!-- <div class="form-check">
+            
+            <label id="from-check" for="formCheck" style="cursor:pointer">
+                <input type="checkbox" name="gender" value="male" class="form-check-input" id="from-check-box">개인정보 수집 및 이용에 동의합니다.(필수)
+            </label>
+        </div><br> -->
+
+        <label style="cursor:pointer" class="form-check">
+            <input type="checkbox" name="fromCheck" class="form-check-input"/> 개인정보 수집 및 이용에 동의합니다. (필수)</label> <br>
+        <div class="row">
+            <div class="col d-grid">
+                <input type="submit" class="btn btn-outline-primary btn-block" value="가입하기">
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    const id_check = () => {
+        const id = document.getElementById("member-id").value;
+        const idResult = document.getElementById("email-result");
+        const exp = /^(?=.*[a-z])(?=.*\d)[-_a-z\d]{5,10}$/;
+        if (id.length == 0) {
+            idResult.innerHTML = "필수입력입니다.";
+            idResult.style.color = "red";
+        } else if (id.match(exp)) {
+            idResult.innerHTML = "사용가능한 아이디입니다.";
+            idResult.style.color = "green";
+        } else {
+            idResult.innerHTML = "5~10글자, 영문소문자 필수, 숫자 필수, 특수문자는 -_ 만 가능합니다.";
+            idResult.style.color = "red";
+        }
+    }
+
+    const password_check = () => {
+        const password = document.getElementById("member-password").value;
+        const passwordResult = document.getElementById("password-result");
+        const exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$-_])[!#$-_A-Za-z\d]{6,18}$/;
+        if (password.length == 0) {
+            passwordResult.innerHTML = "필수입력입니다.";
+            passwordResult.style.color = "red";
+        } else if (password.match(exp)) {
+            passwordResult.innerHTML = "사용가능한 비밀번호입니다.";
+            passwordResult.style.color = "green";
+        } else {
+            passwordResult.innerHTML = "6~18글자, 영문대/소문자 필수, 숫자 필수, 특수문자 필수(!#$-_)만 가능합니다.";
+            passwordResult.style.color = "red";
+        }
+    }
+
+    const password_confirm = () => {
+        const password = document.getElementById("member-password").value;
+        const passwordCheck = document.getElementById("password-confirm").value;
+        const passwordConfirm = document.getElementById("password-confirm-result");
+        if (passwordCheck.length == 0) {
+            passwordConfirm.innerHTML = "필수입력입니다.";
+            passwordConfirm.style.color = "red";
+        } else if (password == passwordCheck) {
+            passwordConfirm.innerHTML = "일치합니다.";
+            passwordConfirm.style.color = "green";
+        } else {
+            passwordConfirm.innerHTML = "비밀번호가 일치하지 않습니다.";
+            passwordConfirm.style.color = "red";
+        }
+    }
+
+    const name_check = () => {
+        const name = document.getElementById("name").value;
+        const nameResult = document.getElementById("name-result");
+        if (name.length == 0) {
+            nameResult.innerHTML = "필수입력입니다."
+            nameResult.style.color = "red";
+            nameResult.style.display = "block";
+        } else {
+            nameResult.style.display = "none";
+        }
+    }
+
+    const email_check = () => {
+        const email = document.getElementById("member-email").value;
+        const emailResult = document.getElementById("email-result");
+        if(email.length == 0) {
+            emailResult.innerHTML = "필수입력입니다."
+            emailResult.style.color = "red";
+            emailResult.style.display = "block";
+        } else {
+            emailResult.style.display = "none";
+        }
+    }
+
+    const domain_select = () => {
+        const domainSelect = document.getElementById("email-domain-select");
+        const domain = document.getElementById("email-domain");
+        domain.value = domainSelect.value;
+    }
+
+    
+
+    const birth_year_check = () => {
+        const birthYear = document.getElementById("birth_year").value;
+        const birthResult = document.getElementById("birth-year-result");
+        const exp = /^[0-9]+$/;
+        if (!birthYear.match(exp)) {
+            birthResult.innerHTML = "형식에 맞지 않습니다.";
+            birthResult.style.color = "red";
+            birthResult.style.display = "block";
+        } else {
+            birthResult.style.display = "none";
+        }
+    }
+
+    // function changePhone1() {
+    //     const phone1 = document.getElementById("phone1").value;
+    //     if (phone1.length === 3) {
+    //         document.getElementById("phone2").focus();
+    //     }
+    // }
+    // function changePhone2() {
+    //     const phone2 = document.getElementById("phone2").value;
+    //     if (phone2.length === 4) {
+    //         document.getElementById("phone3").focus();
+    //     }
+    // }
+    // function changePhone3() {
+    //     const phone3 = document.getElementById("phone3").value;
+    //     if (phone3.length === 4) {
+    //         document.getElementById("sendMessage").focus();
+    //         document.getElementById("sendMessage").setAttribute("style", "background-color:yellow;")
+    //         document.getElementById("sendMessage").disabled = false;
+    //     }
+    // }
+
+    const phoneNumber = () => {
+        const phone = document.getElementById("phone").value;
+        if(phone.length == 11){
+            document.getElementById("sendMessage").focus();
+            document.getElementById("sendMessage").setAttribute("style", "background-color:yellow;")
+            document.getElementById("sendMessage").disabled = false;
+        }
+    }
+    function initButton() {
+        document.getElementById("sendMessage").disabled = true;
+        document.getElementById("completion").disabled = true;
+        document.getElementById("certificationNumber").innerHTML = "000000";
+        document.getElementById("timeLimit").innerHTML = "05:00";
+        document.getElementById("sendMessage").setAttribute("style", "background-color:none;")
+        document.getElementById("completion").setAttribute("style", "background-color:none;")
+    }
+
+    let processID = -1;
+
+    const getToken = () => {
+
+        document.getElementById("completion").setAttribute("style", "background-color:yellow;")
+        document.getElementById("completion").disabled = false;
+
+        if (processID != -1) clearInterval(processID);
+        const token = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
+        document.getElementById("certificationNumber").innerText = token;
+        let time = 300;
+        processID = setInterval(function () {
+            if (time < 0 || document.getElementById("sendMessage").disabled) {
+                clearInterval(processID);
+                initButton();
+                return;
+            }
+            let mm = String(Math.floor(time / 60)).padStart(2, "0");
+            let ss = String(time % 60).padStart(2, "0");
+            let result = mm + ":" + ss;
+            document.getElementById("timeLimit").innerText = result;
+            time--;
+        }, 50);
+    };
+
+    function checkCompletion() {
+        alert("문자 인증이 완료되었습니다.")
+        initButton();
+        document.getElementById("completion").innerHTML = "인증완료"
+        document.getElementById("signUpButton").disabled = false;
+        document.getElementById("signUpButton").setAttribute("style", "background-color:yellow;")
+    }
+
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if (data.userSelectedType === 'R') {
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraAddr !== '') {
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+
+</script>
+
+</html>
