@@ -1,3 +1,3 @@
 const fun1 = () => {
-    alert("호출됐어요.")
+    alert("https://github.com/Kongsis.")
 }

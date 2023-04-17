@@ -4,15 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" href="css/index.css">
     <title>Document</title>
+    <style>
+        * {
+            font-family: 'TTCrownMychewR';
+        }
+
+        body {
+            padding: 40px 0px;
+        }
+
+        #hometag {
+            /* margin-top: 40px; */
+            margin-left: 60px;
+        }
+        
+        h2 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        .container {
+            width: 400px;
+        }
+    </style>
 </head>
 <body>
-    <h2>로그인 페이지</h2>
-    <button onclick="goIndex()">index로 가기</button>
+    <!-- <button onclick="goIndex()">Home으로 돌아가기</button> -->
+    <a href="index.html" id="hometag">Home으로 돌아가기</a>
+    <h2>Login</h2>
+    <div class="container">
+        <label for="id">아이디</label>
+        <input type="text" id="member-id" name="member_id" class="form-control" onblur="id_check()"
+            placeholder="아이디를 입력해 주세요.">
+        <h6 id="email-result"></h6> <br>
+
+        <label for="password">비밀번호</label>
+        <input type="password" id="member-password" name="member_password" class="form-control"
+            onblur="password_check()" placeholder="비밀번호를 입력해 주세요.">
+        <h6 id="password-result"></h6> <br>
+        <div class="row">
+            <div class="col-3">
+                <a href="save.html">회원가입</a>
+                <!-- <a href="">아이디/비밀번호 찾기</a> -->
+            </div>
+            <div class="col-6">
+                <a href="" id="serch" onclick="pageOpen()">아이디/비밀번호 찾기</a>
+            </div>
+            <div class="col-3">
+                <input type="button" id="loginOk" name="member_login" onclick="loginOk()" value="로그인" class="btn btn-primary" style="float:right">
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     const goIndex = () => {
         history.back();
+    }
+
+    const pageOpen = () => {
+        window.open("#", target="_blank", "width=500,height=600,left=400,top=100");
     }
 </script>
 </html>

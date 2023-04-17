@@ -21,8 +21,8 @@
     }
 
     #hometag {
-        /* margin-top: 40px; */
-        margin-left: 60px;
+            /* margin-top: 40px; */
+            margin-left: 60px;
     }
 
     h1 {
@@ -34,7 +34,6 @@
         width: 600px;
     }
 </style>
-
 <body>
     <a href="index.html" id="hometag">Home으로 돌아가기</a>
     <div>
@@ -92,15 +91,14 @@
         </div>
 
         <label for="gender">성별</label> <br><br>
-        남 : <input type="radio" name="gender" value="male" class="form-check-input me-4">
+        남 : <input type="radio" name="gender" value="male" class="form-check-input">
         여 : <input type="radio" name="gender" value="female" class="form-check-input">
         </select> <br><br>
 
-        <h6 id="address-result"></h6>
-        <label for="email">이메일 입력</label>
+        <!-- <label for="email">이메일</label>
         <div class="row">
             <div class="col">
-                <input type="text" id="member-email" name="memberEmail" class="form-control">
+                <input type="text" id="email-value" name="emailValue" class="form-control" onblur="email_check()">
             </div>
             @
             <div class="col">
@@ -115,12 +113,38 @@
                 </select>
             </div>
             <div class="col">
-                <input type="button" id="send-verification-code" class="btn btn-primary" value="이메일 확인"
-                    onclick="sendVerificationCode()">
+                <input type="button" class="btn btn-primary btn-block" value="이메일 확인" onclick="hello()">
+            </div>
+            <h6 id="email-result"></h6>
+            <h6 id="email-domain-result"></h6>
+        </div> <br> -->
+
+        <h6 id="address-result"></h6>
+        <label for="email">이메일 입력</label>
+        <div class="row">
+            <div class="col">
+                <input type="text" id="member-email" name="memberEmail" onblur="email_check()"
+                    class="form-control">
+                <!-- <h6 id="email-result"></h6> <br> -->
+            </div>
+            @
+            <div class="col">
+                <input type="text" id="email-domain" name="emailDomain" class="form-control">
+            </div>
+            <div class="col">
+                <select id="email-domain-select" onchange="domain_select()" class="form-select">
+                    <option value="">직접입력</option>
+                    <option value="naver.com">네이버</option>
+                    <option value="gmail.com">지메일</option>
+                    <option value="daum.net">다음</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="button" id="send-verification-code" class="btn btn-primary" value="이메일 확인" onclick="sendVerificationCode()">
             </div>
             <h6 id="email-domain-result"></h6> <br>
         </div>
-        <!-- <div class="col-2">
+            <!-- <div class="col-2">
                 <input type="button" id="send-verification-code" class="btn btn-primary mb-3" value="인증코드 전송" onclick="sendVerificationCode()">
             </div>
         </div>
@@ -162,7 +186,8 @@
                 </select>
             </div>
             <div class="phone col-md-6">
-                <input id="phone" type="text" maxlength="11" oninput="phoneNumber()" class="form-control rounded-2">
+                <input id="phone" type="text" maxlength="11" oninput="phoneNumber()"
+                class="form-control rounded-2">
             </div>
         </div> <br>
 
@@ -228,51 +253,16 @@
         </div><br> -->
 
         <label style="cursor:pointer" class="form-check">
-            <input type="checkbox" name="fromCheck" class="form-check-input" /> 개인정보 수집 및 이용에 동의합니다. (필수)</label> <br>
+            <input type="checkbox" name="fromCheck" class="form-check-input"/> 개인정보 수집 및 이용에 동의합니다. (필수)</label> <br>
         <div class="row">
             <div class="col d-grid">
-                <input type="submit" class="btn btn-outline-primary btn-block" value="가입하기" onclick="join_click()">
+                <input type="submit" class="btn btn-outline-primary btn-block" value="가입하기">
             </div>
         </div>
 
     </div>
 </body>
 <script>
-    // const loginForm = document.forms.loginForm;
-    // loginForm.addEventListener('submit', function (event) {
-    //     if (!login_check()) {
-    //         event.preventDefault();
-    //     }
-    // });
-
-    // const login_check = () => {
-    //     const userName = document.getElementById("member-userName");
-    //     const password = document.getElementById("member-password");
-    //     const passwordConfirm = document.getElementById("member-PasswordConfirm");
-    //     const name = document.getElementById("member-name");
-    //     const mobile = document.getElementById("member-moblie");
-    //     const email = document.getElementById("member-email");
-    //     if (!id_check()) {
-    //         userName.focus();
-    //         return false;
-    //     } else if (!password_check()) {
-    //         password.focus();
-    //         return false;
-    //     } else if (!password_confirm()) {
-    //         passwordConfirm.focus();
-    //         return false;
-    //     } else if (!name_check()) {
-    //         name.focus();
-    //     } else if (!phoneNumber()) {
-    //         mobile.focus();
-    //     } else if (!email_check()) {
-    //         email.focus();
-    //     }
-    //     else {
-    //         return true;
-    //     }
-    // }
-
     const id_check = () => {
         const id = document.getElementById("member-id").value;
         const idResult = document.getElementById("email-result");
@@ -333,6 +323,18 @@
         }
     }
 
+    // const email_check = () => {
+    //     const email = document.getElementById("member-email").value;
+    //     const emailResult = document.getElementById("email-result");
+    //     if(email.length == 0) {
+    //         emailResult.innerHTML = "필수입력입니다."
+    //         emailResult.style.color = "red";
+    //         emailResult.style.display = "block";
+    //     } else {
+    //         emailResult.style.display = "none";
+    //     }
+    // }
+
     const domain_select = () => {
         const domainSelect = document.getElementById("email-domain-select");
         const domain = document.getElementById("email-domain");
@@ -343,20 +345,13 @@
         const email = document.getElementById("member-email").value;
         const domain = document.getElementById("email-domain").value;
         const domainResult = document.getElementById("email-domain-result");
-        const exp = /^[@,]$/;
-        if (!(domain.match(exp)) && !(email.length==0)) {
-            domainResult.innerHTML = "이메일이 확인되었습니다.";
+        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!emailRegex.test(email)) {
+            domainResult.style.display = "이메일이 확인되었습니다.";
             domainResult.style.color = "green";
-            return true;
-        } else if (!email.length==0) {
-            if(!doamin.match(exp)) {
-                domainResult.innerHTML = "형식에 맞지 않습니다.";
-                domainResult.style.color = "red";
-                return false;
-            }
+        } else {
             domainResult.innerHTML = "형식에 맞지 않습니다.";
             domainResult.style.color = "red";
-            return false;
         }
     }
 
@@ -370,19 +365,6 @@
             birthResult.style.display = "block";
         } else {
             birthResult.style.display = "none";
-        }
-    }
-
-    const birth_day_check = () => {
-        const birthDay = document.getElementById("birth_day").value;
-        const dayResult = document.getElementById("birth-day-result");
-        const exp = /^[0-9]+$/;
-        if (!birthDay.match(exp)) {
-            dayResult.innerHTML = "형식에 맞지 않습니다.";
-            dayResult.style.color = "red";
-            dayResult.style.display = "block";
-        } else {
-            dayResult.style.display = "none";
         }
     }
 
@@ -409,8 +391,7 @@
 
     const phoneNumber = () => {
         const phone = document.getElementById("phone").value;
-        // const exp = /^\+\d+\s\d{3}-\d{4}-\d{4}$/
-        if (phone.length == 11) {
+        if(phone.length == 11){
             document.getElementById("sendMessage").focus();
             document.getElementById("sendMessage").setAttribute("style", "background-color:yellow;")
             document.getElementById("sendMessage").disabled = false;
@@ -506,19 +487,6 @@
         }).open();
     }
 
-    const join_click = () => {
-        const result = login_check();
-        if (result) {
-            const result1 = confirm("회원가입을 완료하시겠습니까?");
-            if (result1) {
-                alert("회원가입이 완료되었습니다.");
-            } else {
-                history.back();
-            }
-        } else {
-            alert("필수사항을 입력하지 않았습니다.");
-        }
-    }
 </script>
 
 </html>

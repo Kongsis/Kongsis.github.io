@@ -5,19 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js" defer></script>
     <!-- defer: body부분을 우선읽고 script를 적용 -->
+    <style>
+        * {
+            font-family: 'TTCrownMychewR';
+        }
+
+        h1 {
+            color: darkblue;
+            /* font-size: 80%; */
+        }
+    </style>
 </head>
 <body>
-    <h2>어서오세요</h2>
-    <a href="save.html">회원가입</a>
-    <button onclick="goLogin()">로그인</button>
-    <button onclick="fun1()">함수호출</button>
+    <div id="homepage" class="container">
+        <button onclick="member()" class="btn btn-primary btn-block mt-2">회원가입</button>
+        <!-- <a href="20230413_check.html">회원가입</a> -->
+        <button onclick="goLogin()" class="btn btn-primary btn-block mt-2">로그인</button>
+        <!-- <a href="login.html">로그인</a> -->
+        <button onclick="fun1()" class="btn btn-primary btn-block mt-2">Github주소</button>
+        <!-- <a href="js/index.js">함수호출</a> -->
+    </div>
+    <h1 style="text-align: center">Hello Ilbo World</h1>
 </body>
 <script>
     const goLogin = () => {
         location.href = "login.html";
     }
+    const member = () => {
+        location.href="save.html";
+    }
+    
 </script>
 </html>
