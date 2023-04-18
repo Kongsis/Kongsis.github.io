@@ -47,17 +47,21 @@
         <input type="password" id="member-password" name="member_password" class="form-control"
             onblur="password_check()" placeholder="비밀번호를 입력해 주세요.">
         <h6 id="password-result"></h6> <br>
+        <input type="button" id="loginOk" name="member_login" onclick="loginOk()" value="로그인" class="btn btn-primary" style="width:380px"> <br><br>
         <div class="row">
-            <div class="col-3">
+            <div class="col-6">
                 <a href="save.html">회원가입</a>
                 <!-- <a href="">아이디/비밀번호 찾기</a> -->
             </div>
-            <div class="col-6">
-                <a href="" id="serch" onclick="pageOpen()">아이디/비밀번호 찾기</a>
+            <div class="col-3">
+                <a href="#" id="idSearch" onclick="idPageOpen()" style="float:right">아이디 찾기</a>
             </div>
             <div class="col-3">
-                <input type="button" id="loginOk" name="member_login" onclick="loginOk()" value="로그인" class="btn btn-primary" style="float:right">
+                <a href="#" id="pwSearch" onclick="pwPageOpen()" style="float:right">비밀번호 찾기</a>
             </div>
+            <!-- <div class="col-3">
+                <input type="button" id="loginOk" name="member_login" onclick="loginOk()" value="로그인" class="btn btn-primary" style="float:right">
+            </div> -->
         </div>
     </div>
 </body>
@@ -65,9 +69,12 @@
     const goIndex = () => {
         history.back();
     }
-
-    const pageOpen = () => {
-        window.open("#", target="_blank", "width=500,height=600,left=400,top=100");
+    const idPageOpen = () => {
+        window.open("idsearch.html", target="_blank", "width=500,height=600,left=400,top=100");
     }
+    const pwPageOpen = () => {
+        window.open("pwsearch.html", target="_blank", "width=500,height=600,left=400,top=100");
+    }
+    
 </script>
 </html>

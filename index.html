@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,31 +11,95 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js" defer></script>
+
     <!-- defer: body부분을 우선읽고 script를 적용 -->
     <style>
         * {
             font-family: 'TTCrownMychewR';
+            /* color: darkblue; */
         }
 
-        h1 {
-            color: darkblue;
-            /* font-size: 80%; */
+        body {
+            background-image: url('images/laptop-g6376852de_1280.png');
+            background-position: center center;
+            background-size: cover;
+            /* display: flex; */
+            /* justify-content: center; */
+            /* align-items: center; */
+            /* background-position: center center; */
+            height: 100vw;
+            width: 100vw;
+            /* width: 100vh; */
         }
+
+        /* h1 { */
+            /* color: darkblue; */
+            /* font-size: 80%; */
+        /* } */
     </style>
 </head>
+
 <body>
-    <h2>어서오세요</h2>
-    <a href="save.html">회원가입</a>
-    <button onclick="goLogin()">로그인</button>
-    <button onclick="fun1()">함수호출</button>
+    <div id="wrapper">
+    <div id="homepage" class="container">
+        <button onclick="member()" class="btn btn-primary btn-block mt-2">회원가입</button>
+        <!-- <a href="20230413_check.html">회원가입</a> -->
+        <button onclick="goLogin()" class="btn btn-primary btn-block mt-2">로그인</button>
+        <!-- <a href="login.html">로그인</a> -->
+        <button onclick="fun1()" class="btn btn-primary btn-block mt-2">Github주소</button>
+        <!-- <a href="js/index.js">함수호출</a> -->
+    </div>
+    <h1 style="text-align:center" class="display-1">My portfolio</h1>
+    <div class="Clock px-4 pt-5 my-5 text-center">
+        <h1 class="display-6 text-body-emphasis"> 현재 시간 </h1>
+        <h1 id="Clock" class="display-2 fw-bold text-body-emphasis">00:00</h1>
+        <h2 id="Clockday" class="display-3 fw-bold text-body-emphasis">00년 00월 00일</h2>
+        <br><br>
+    </div>
+</div>
 </body>
 <script>
     const goLogin = () => {
         location.href = "login.html";
     }
     const member = () => {
-        location.href="save.html";
+        location.href = "save.html";
     }
-    
+    function Clock() {
+    var date = new Date();
+    var YYYY = String(date.getFullYear());
+    var MM = String(date.getMonth() + 1);
+    var DD = Zero(date.getDate());
+    var hh = Zero(date.getHours());
+    var mm = Zero(date.getMinutes());
+    var ss = Zero(date.getSeconds());
+    var Week = Weekday();
+
+    Write(YYYY, MM, DD, hh, mm, ss, Week);
+    //시계에 1의자리수가 나올때 0을 넣어주는 함수 (ex : 1초 -> 01초)
+
+    function Zero(num) {
+      return (num < 10 ? '0' + num : '' + num);
+    }
+
+    //요일을 추가해주는 함수
+    function Weekday() {
+      var Week = ['일', '월', '화', '수', '목', '금', '토'];
+      var Weekday = date.getDay();
+      return Week[Weekday];
+    }
+
+
+    //시계부분을 써주는 함수
+    function Write(YYYY, MM, DD, hh, mm, ss, Week) {
+      var Clockday = document.getElementById("Clockday");
+      var Clock = document.getElementById("Clock");
+      Clockday.innerText = YYYY + '년' + '\t '+ MM + '월' + '\t '+ DD + '일' + '\t '+ Week+ '요일';
+      Clock.innerText = hh + ':' + mm + ':' + ss;
+    }
+  }
+
+  setInterval(Clock, 1000);
 </script>
+
 </html>

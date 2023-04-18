@@ -10,6 +10,8 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" href="css/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 </head>
 <style>
     * {
@@ -43,7 +45,7 @@
     <div id="save_from" class="container">
         <label for="id">아이디</label>
         <input type="text" id="member-id" name="member_id" class="form-control" onblur="id_check()"
-            placeholder="이메일을 입력해 주세요.">
+            placeholder="아이디를 입력해 주세요.">
         <h6 id="email-result"></h6> <br>
 
         <label for="password">비밀번호</label>
@@ -115,8 +117,8 @@
                 </select>
             </div>
             <div class="col">
-                <input type="button" id="send-verification-code" class="btn btn-primary" value="이메일 확인"
-                    onclick="sendVerificationCode()">
+                <input type="button" id="email-domain-check" class="btn btn-primary" value="이메일 확인"
+                    onclick="email_domain_check()">
             </div>
             <h6 id="email-domain-result"></h6> <br>
         </div>
@@ -166,18 +168,6 @@
             </div>
         </div> <br>
 
-        <!-- <div class="input-group"> -->
-        <!-- <div class="phone input-group">
-            <input id="phone1" type="text" size="1" maxlength="3" oninput="changePhone1()"
-                class="form-control rounded-2"> -
-            <input id="phone2" type="text" size="3" maxlength="4" oninput="changePhone2()"
-                class="form-control rounded-2"> -
-            <input id="phone3" type="text" size="3" maxlength="4" oninput="changePhone3()"
-                class="form-control rounded-2">
-        </div> -->
-
-        <!-- </div> -->
-
         <div class="auth">
             <button disabled id="sendMessage" onclick="getToken()">인증번호 전송</button>
             <div id="certificationNumber">000000</div>
@@ -187,6 +177,45 @@
             <div id="timeLimit">05:00</div>
             <button disabled id="completion" onclick="checkCompletion()">인증확인</button>
         </div> <br>
+
+        <!-- <label for="mobile">휴대전화</label>
+        <div class="row">
+          <div class="col-md-3">
+            <select name="mobile_carrier" id="mobile_carrier" class="form-select">
+              <option value="">통신사선택</option>
+              <option value="LG U+">LG U+</option>
+              <option value="SKT">SKT</option>
+              <option value="KT">KT</option>
+              <option value="MVNO">MVNO</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select name="nation_code" id="nation_code" class="form-select">
+              <option value="233">가나 +233</option>
+              <option value="31">네덜란드 +31</option>
+              <option value="82" selected>대한민국 +82</option>
+              <option value="1">미국 +1</option>
+              <option value="84">베트남 +84</option>
+              <option value="41">스위스 +41</option>
+              <option value="81">일본 +81</option>
+              <option value="33">프랑스 +33</option>
+              <option value="582">홍콩 +582</option>
+            </select>
+          </div>
+          <div class="phone col-md-6">
+            <input id="phone" type="text" maxlength="11" class="form-control rounded-2">
+          </div>
+        </div> <br>
+        
+        <div class="auth">
+          <button id="sendMessage">인증번호 전송</button>
+          <div id="certificationNumber">000000</div>
+        </div>
+        
+        <div class="timer">
+          <div id="timeLimit">05:00</div>
+          <button disabled id="completion">인증확인</button>
+        </div> <br> -->
 
         <!-- row g-2 가로로 배치할 요소의 숫자 -->
         <!-- <div class="row g-2"> -->
@@ -220,12 +249,6 @@
                 <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
             </div>
         </div> <br>
-        <!-- <div class="form-check">
-            
-            <label id="from-check" for="formCheck" style="cursor:pointer">
-                <input type="checkbox" name="gender" value="male" class="form-check-input" id="from-check-box">개인정보 수집 및 이용에 동의합니다.(필수)
-            </label>
-        </div><br> -->
 
         <label style="cursor:pointer" class="form-check">
             <input type="checkbox" name="fromCheck" class="form-check-input" /> 개인정보 수집 및 이용에 동의합니다. (필수)</label> <br>
@@ -238,41 +261,6 @@
     </div>
 </body>
 <script>
-    // const loginForm = document.forms.loginForm;
-    // loginForm.addEventListener('submit', function (event) {
-    //     if (!login_check()) {
-    //         event.preventDefault();
-    //     }
-    // });
-
-    // const login_check = () => {
-    //     const userName = document.getElementById("member-userName");
-    //     const password = document.getElementById("member-password");
-    //     const passwordConfirm = document.getElementById("member-PasswordConfirm");
-    //     const name = document.getElementById("member-name");
-    //     const mobile = document.getElementById("member-moblie");
-    //     const email = document.getElementById("member-email");
-    //     if (!id_check()) {
-    //         userName.focus();
-    //         return false;
-    //     } else if (!password_check()) {
-    //         password.focus();
-    //         return false;
-    //     } else if (!password_confirm()) {
-    //         passwordConfirm.focus();
-    //         return false;
-    //     } else if (!name_check()) {
-    //         name.focus();
-    //     } else if (!phoneNumber()) {
-    //         mobile.focus();
-    //     } else if (!email_check()) {
-    //         email.focus();
-    //     }
-    //     else {
-    //         return true;
-    //     }
-    // }
-
     const id_check = () => {
         const id = document.getElementById("member-id").value;
         const idResult = document.getElementById("email-result");
@@ -339,24 +327,16 @@
         domain.value = domainSelect.value;
     }
 
-    const sendVerificationCode = () => {
-        const email = document.getElementById("member-email").value;
+    const email_domain_check = () => {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const username = document.getElementById("member-email").value;
         const domain = document.getElementById("email-domain").value;
-        const domainResult = document.getElementById("email-domain-result");
-        const exp = /^[@,]$/;
-        if (!(domain.match(exp)) && !(email.length==0)) {
-            domainResult.innerHTML = "이메일이 확인되었습니다.";
-            domainResult.style.color = "green";
-            return true;
-        } else if (!email.length==0) {
-            if(!doamin.match(exp)) {
-                domainResult.innerHTML = "형식에 맞지 않습니다.";
-                domainResult.style.color = "red";
-                return false;
-            }
-            domainResult.innerHTML = "형식에 맞지 않습니다.";
-            domainResult.style.color = "red";
-            return false;
+        if (emailPattern.test(username + "@" + domain)) {
+            document.getElementById("email-domain-result").innerHTML = "유효한 이메일 주소입니다.";
+            document.getElementById("email-domain-result").style.color = "green";
+        } else {
+            document.getElementById("email-domain-result").innerHTML = "유효하지 않은 이메일 주소입니다.";
+            document.getElementById("email-domain-result").style.color = "red";
         }
     }
 
@@ -386,37 +366,19 @@
         }
     }
 
-    // function changePhone1() {
-    //     const phone1 = document.getElementById("phone1").value;
-    //     if (phone1.length === 3) {
-    //         document.getElementById("phone2").focus();
-    //     }
-    // }
-    // function changePhone2() {
-    //     const phone2 = document.getElementById("phone2").value;
-    //     if (phone2.length === 4) {
-    //         document.getElementById("phone3").focus();
-    //     }
-    // }
-    // function changePhone3() {
-    //     const phone3 = document.getElementById("phone3").value;
-    //     if (phone3.length === 4) {
-    //         document.getElementById("sendMessage").focus();
-    //         document.getElementById("sendMessage").setAttribute("style", "background-color:yellow;")
-    //         document.getElementById("sendMessage").disabled = false;
-    //     }
-    // }
-
     const phoneNumber = () => {
-        const phone = document.getElementById("phone").value;
-        // const exp = /^\+\d+\s\d{3}-\d{4}-\d{4}$/
-        if (phone.length == 11) {
+        const input = document.getElementById("phone");
+        const num = input.value.replace(/-/g, "");
+        const regex = /(\d{3})(\d{4})(\d{4})/;
+        if (num.length === 11) {
+            input.value = num.replace(regex, "$1-$2-$3");
             document.getElementById("sendMessage").focus();
-            document.getElementById("sendMessage").setAttribute("style", "background-color:yellow;")
+            document.getElementById("sendMessage").setAttribute("style", "background-color:yellow;");
             document.getElementById("sendMessage").disabled = false;
         }
     }
-    function initButton() {
+
+    const initButton = () => {
         document.getElementById("sendMessage").disabled = true;
         document.getElementById("completion").disabled = true;
         document.getElementById("certificationNumber").innerHTML = "000000";
@@ -428,10 +390,8 @@
     let processID = -1;
 
     const getToken = () => {
-
         document.getElementById("completion").setAttribute("style", "background-color:yellow;")
         document.getElementById("completion").disabled = false;
-
         if (processID != -1) clearInterval(processID);
         const token = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
         document.getElementById("certificationNumber").innerText = token;
@@ -450,7 +410,7 @@
         }, 50);
     };
 
-    function checkCompletion() {
+    const checkCompletion = () => {
         alert("문자 인증이 완료되었습니다.")
         initButton();
         document.getElementById("completion").innerHTML = "인증완료"
@@ -506,19 +466,26 @@
         }).open();
     }
 
-    const join_click = () => {
-        const result = login_check();
-        if (result) {
-            const result1 = confirm("회원가입을 완료하시겠습니까?");
-            if (result1) {
-                alert("회원가입이 완료되었습니다.");
-            } else {
-                history.back();
+    const checkRequiredInputs = () => {
+        var requiredInputs = document.querySelectorAll('input');
+        for (var i=0; i<requiredInputs.length; i++) {
+            if (!requiredInputs[i].value) {
+                requiredInputs[i].focus();
+                alert("필수사항을 입력하지 않았습니다.")
+                return false;
             }
-        } else {
-            alert("필수사항을 입력하지 않았습니다.");
+        }
+        return true;
+    }
+
+    const join_click = () => {
+        if (checkRequiredInputs()) {
+            alert("회원가입을 축하합니다.");
         }
     }
+    var signupButton = document.getElementById('signup-button');
+    signupButton.addEventListener('click', submitForm);
+
 </script>
 
 </html>
